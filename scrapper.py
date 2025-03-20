@@ -1,7 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 import json
+import sqlite3
 
+con = sqlite3.connect("book_data.sqlite3")
 URL = "https://books.toscrape.com/"
 
 def scrape_books(url):
@@ -33,10 +35,53 @@ def scrape_books(url):
     with open("book_data.json", "w", encoding="utf-8") as f:
       json.dump(Lists, f, indent=4, ensure_ascii=False)
 
-  print("Data is saved")
+def read_json():
+  books = []
+  with open("book_data.json", "r") as f:
+    data = json.load(f)
+    for book in data:
+      books.append(tuple(book))
+  return books[1:]
+
+
+def create_table(con):
+  CREATE_TABLE = """
+    CREATE TABLE IF NOT EXISTS books_data(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title CHAR(255) NOT NULL,
+    currency CHAR(255) NOT NULL,
+    price CHAR(255) NOT NULL
+    );
+    """
+  cur = con.cursor()
+  cur.execute(CREATE_TABLE)
+  print("Books Data Table created successfully.")
+
+def insert_book(con, books):
+  INSERT_QUERY = """
+    INSERT INTO books_data
+    (
+      title,
+      currency,
+      price
+    )
+    VALUES(?,?,?);
+    """
+  cur = con.cursor()
+  cur.executemany(INSERT_QUERY, books)
+  print(f"{len(books)} books were inserted successfully.")
 
 
 # read json and save in database
 
+def main(url, con):
+  scrape_books(url)
+  print("Data is saved")
 
-scrape_books(URL)
+  books = read_json()
+
+  create_table(con)
+
+  insert_book(con, books)
+
+main(URL, con)
