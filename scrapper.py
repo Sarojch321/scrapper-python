@@ -37,10 +37,10 @@ def scrape_books(url):
 
 def read_json():
   books = []
-  with open("book_data.json", "r") as f:
+  with open("book_data.json", "r", encoding="utf-8") as f:
     data = json.load(f)
     for book in data:
-      books.append(tuple(book))
+      books.append(tuple(book.values()))
   return books[1:]
 
 
@@ -69,6 +69,7 @@ def insert_book(con, books):
     """
   cur = con.cursor()
   cur.executemany(INSERT_QUERY, books)
+  con.commit()
   print(f"{len(books)} books were inserted successfully.")
 
 
@@ -83,5 +84,8 @@ def main(url, con):
   create_table(con)
 
   insert_book(con, books)
+
+  cur = con.cursor()
+  
 
 main(URL, con)
