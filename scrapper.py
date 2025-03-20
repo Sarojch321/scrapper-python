@@ -1,7 +1,7 @@
-import requests
-from bs4 import BeautifulSoup
 import json
 import sqlite3
+import requests
+from bs4 import BeautifulSoup
 
 con = sqlite3.connect("book_data.sqlite3")
 URL = "https://books.toscrape.com/"
@@ -108,3 +108,4 @@ main(URL, con)
 # git add .   => track files and folders
 # git commit -m "Your message"   => save changes
 # git push  =>  uploads changes
+# git checkout -b featre1 => branch banaina
