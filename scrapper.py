@@ -102,3 +102,9 @@ main(URL, con)
 # git add .
 # git commit -m "Your message"
 # copy paste git code from github
+
+
+# code change vayo vane jaile ni yo lekhne
+# git add .   => track files and folders
+# git commit -m "Your message"   => save changes
+#git push  =>  uploads changes
