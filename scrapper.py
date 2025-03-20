@@ -1,7 +1,7 @@
-import requests
-from bs4 import BeautifulSoup
 import json
 import sqlite3
+import requests
+from bs4 import BeautifulSoup
 
 con = sqlite3.connect("book_data.sqlite3")
 URL = "https://books.toscrape.com/"
