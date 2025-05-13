@@ -90,22 +90,3 @@ def main(url, con):
 
 main(URL, con)
 
-
-# install git
-# create repositary in git
-# go to bit bash
-# git config --global user.name "Saroj Dangaura"
-# git cinfig --global user.email "sarojdangaura321@gmail.com"
-# git init
-# git status => if you want to check what are the status of files
-# git diff => if you want to check what are the changes
-# git add .
-# git commit -m "Your message"
-# copy paste git code from github
-
-
-# code change vayo vane jaile ni yo lekhne
-# git add .   => track files and folders
-# git commit -m "Your message"   => save changes
-# git push  =>  uploads changes
-# git checkout -b featre1 => branch banaina
